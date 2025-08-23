@@ -23,16 +23,11 @@
             padding: 0px;
         }
         
-        <!--.container {
-            text-align: center;
-            position: relative;
-        }-->
-        
         .rotated-container {
             display: flex;
-            flex-direction: row-reverse;
+            flex-direction: row;
             align-items: center;
-            gap: 0px;
+            gap: 0.5rem;
             margin: 2rem;
 			white-space: nowrap;
         }
@@ -51,7 +46,7 @@
         }
         
 		.rotated-nfc {
-            font-size: 1.4rem;
+            font-size: 2rem;
             font-weight: bold;
             padding: 1.2rem;
             display: inline-block;
@@ -61,14 +56,17 @@
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
             backdrop-filter: blur(4px);
             border: 1px solid rgba(255, 255, 255, 0.18);
+			top : 500px
         }
 
     </style>
 </head>
 <body>
-	<div class="rotated-container">
+	<!--<div class="rotated-container">
 		<div class="rotated-text">HITSZ</div>
 		<div class="rotated-nfc">An NFC chip was detected</div>
-	</div>
+	</div>-->
+		<div class="rotated-nfc">Detecte NFC chip</div>
+		<div class="rotated-text">HITSZ</div>
 </body>
 </html>
