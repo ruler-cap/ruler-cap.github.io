@@ -1,18 +1,126 @@
-<html>
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-  <title>DEMO</title>
-  <style>
-    h1, h2 {
-      font-size: 80px; /* 增大字体 */
-      font-weight: bold; /* 加粗字体 */
-      transform: rotate(90deg); /* 顺时针旋转90° */
-      transform-origin: center; /* 旋转中心 */
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HITSZ</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #6a11cb 0%, #F6ECDC 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            color: white;
+            padding: 20px;
+        }
+        
+        .container {
+            text-align: center;
+            position: relative;
+        }
+        
+        .rotated-text {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin: 2rem 0;
+            padding: 1.5rem;
+            display: inline-block;
+            transform: rotate(90deg);
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            transition: all 0.4s ease;
+        }
+        
+        .rotated-text:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(90deg) scale(1.05);
+        }
+        
+        .instructions {
+            max-width: 600px;
+            margin: 2rem auto;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 12px;
+            line-height: 1.6;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .decorative-circle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            z-index: -1;
+        }
+        
+        .circle-1 {
+            width: 300px;
+            height: 300px;
+            top: -150px;
+            left: -150px;
+        }
+        
+        .circle-2 {
+            width: 200px;
+            height: 200px;
+            bottom: -100px;
+            right: -100px;
+        }
+        
+        @media (max-width: 768px) {
+            .rotated-text {
+                font-size: 2.5rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
 </head>
 <body>
- <center><h1>HIT</h1></center>
+    <div class="decorative-circle circle-1"></div>
+    <div class="decorative-circle circle-2"></div>
+    
+    <div class="container">
+		<!--<h1>HITSZ</h1>-->
+        <div class="rotated-text">HITSZ</div>
+        
+        <!--<div class="instructions">
+            <p>这段文字使用CSS的<code>transform: rotate(90deg);</code>属性实现了顺时针90度旋转。</p>
+            <p>页面使用flex布局将内容垂直水平居中，并添加了渐变背景和玻璃态效果增强视觉体验。</p>
+            <p>将鼠标悬停在旋转的文字上可以看到放大效果。</p>
+        </div>-->
+    </div>
+
+    <script>
+        // 添加一些动态效果
+        document.addEventListener('mousemove', (e) => {
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            
+            document.body.style.background = `linear-gradient(${135 + x * 20}deg, 
+                #6a11cb 0%, #2575fc 100%)`;
+        });
+    </script>
 </body>
 </html>
