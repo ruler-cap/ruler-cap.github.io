@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HITSZ</title>
+    <title>全屏图片展示</title>
     <style>
         * {
             margin: 0;
@@ -11,115 +11,47 @@
             box-sizing: border-box;
         }
         
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #6a11cb 0%, #F6ECDC 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        body, html {
+            height: 100%;
             overflow: hidden;
+        }
+        
+        .fullscreen-image {
+            width: 100%;
+            height: 100vh;
+            object-fit: cover;
+        }
+        
+        /* 添加一个简单的加载提示 */
+        .loading {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             color: white;
-            padding: 20px;
-        }
-        
-        .container {
-            text-align: center;
-            position: relative;
-        }
-        
-        .rotated-text {
-            font-size: 3.5rem;
-            font-weight: bold;
-            margin: 2rem 0;
-            padding: 1.5rem;
-            display: inline-block;
-            transform: rotate(90deg);
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(4px);
-            border: 1px solid rgba(255, 255, 255, 0.18);
-            transition: all 0.4s ease;
-        }
-        
-        .rotated-text:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: rotate(90deg) scale(1.05);
-        }
-        
-        .instructions {
-            max-width: 600px;
-            margin: 2rem auto;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 1.5rem;
-            border-radius: 12px;
-            line-height: 1.6;
-            backdrop-filter: blur(4px);
-            border: 1px solid rgba(255, 255, 255, 0.18);
-        }
-        
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-        
-        .decorative-circle {
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            z-index: -1;
-        }
-        
-        .circle-1 {
-            width: 300px;
-            height: 300px;
-            top: -150px;
-            left: -150px;
-        }
-        
-        .circle-2 {
-            width: 200px;
-            height: 200px;
-            bottom: -100px;
-            right: -100px;
-        }
-        
-        @media (max-width: 768px) {
-            .rotated-text {
-                font-size: 2.5rem;
-            }
-            
-            h1 {
-                font-size: 2rem;
-            }
+            font-family: Arial, sans-serif;
+            font-size: 24px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+            z-index: 10;
         }
     </style>
 </head>
 <body>
-    <div class="decorative-circle circle-1"></div>
-    <div class="decorative-circle circle-2"></div>
+    <!-- 图片容器 -->
+    <img class="fullscreen-image" src="9.png" alt="全屏展示的风景图片">
     
-    <div class="container">
-		<!--<h1>HITSZ</h1>-->
-        <div class="rotated-text">HITSZ</div>
-        
-        <!--<div class="instructions">
-            <p>这段文字使用CSS的<code>transform: rotate(90deg);</code>属性实现了顺时针90度旋转。</p>
-            <p>页面使用flex布局将内容垂直水平居中，并添加了渐变背景和玻璃态效果增强视觉体验。</p>
-            <p>将鼠标悬停在旋转的文字上可以看到放大效果。</p>
-        </div>-->
-    </div>
+    <!-- 简单的加载提示 -->
+    <div class="loading">自然风光展示</div>
 
     <script>
-        // 添加一些动态效果
-        document.addEventListener('mousemove', (e) => {
-            const x = e.clientX / window.innerWidth;
-            const y = e.clientY / window.innerHeight;
-            
-            document.body.style.background = `linear-gradient(${135 + x * 20}deg, 
-                #6a11cb 0%, #2575fc 100%)`;
+        // 图片加载完成后隐藏加载提示
+        document.querySelector('.fullscreen-image').addEventListener('load', function() {
+            document.querySelector('.loading').style.display = 'none';
+        });
+        
+        // 如果图片加载失败，显示错误信息
+        document.querySelector('.fullscreen-image').addEventListener('error', function() {
+            document.querySelector('.loading').textContent = '图片加载失败，请检查URL';
         });
     </script>
 </body>
