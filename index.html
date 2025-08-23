@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HITSZ</title>
+    <title>HITSZ - NFC Detected</title>
     <style>
         * {
             margin: 0;
@@ -28,10 +28,17 @@
             position: relative;
         }
         
+        .rotated-container {
+            display: flex;
+            flex-direction: row-reverse;
+            align-items: center;
+            gap: 0px;
+            margin: 2rem 0;
+        }
+        
         .rotated-text {
             font-size: 3.5rem;
             font-weight: bold;
-            margin: 2rem 0;
             padding: 1.5rem;
             display: inline-block;
             transform: rotate(90deg);
@@ -45,6 +52,50 @@
         
         .rotated-text:hover {
             background: rgba(255, 255, 255, 0.2);
+            transform: rotate(90deg) scale(1.05);
+        }
+        
+        .rotated-nfc {
+            font-size: 1.4rem;
+            font-weight: 600;
+            padding: 1.2rem 1.8rem;
+            display: inline-block;
+            transform: rotate(90deg);
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            transition: all 0.4s ease;
+            animation: pulse 2s infinite;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .nfc-icon {
+            width: 24px;
+            height: 24px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: bounce 2s infinite;
+        }
+        
+        .nfc-icon:before {
+            content: "";
+            display: block;
+            width: 12px;
+            height: 12px;
+            background: #6a11cb;
+            border-radius: 2px;
+            position: relative;
+        }
+        
+        .rotated-nfc:hover {
+            background: rgba(255, 255, 255, 0.25);
             transform: rotate(90deg) scale(1.05);
         }
         
@@ -86,13 +137,34 @@
             right: -100px;
         }
         
+        /* 动画效果 */
+        @keyframes pulse {
+            0% { transform: rotate(90deg) scale(1); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2); }
+            50% { transform: rotate(90deg) scale(1.03); box-shadow: 0 12px 36px rgba(0, 0, 0, 0.25); }
+            100% { transform: rotate(90deg) scale(1); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2); }
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        
         @media (max-width: 768px) {
             .rotated-text {
                 font-size: 2.5rem;
             }
             
+            .rotated-nfc {
+                font-size: 1.2rem;
+                padding: 1rem 1.5rem;
+            }
+            
             h1 {
                 font-size: 2rem;
+            }
+            
+            .rotated-container {
+                gap: 30px;
             }
         }
     </style>
@@ -102,24 +174,33 @@
     <div class="decorative-circle circle-2"></div>
     
     <div class="container">
-		<!--<h1>An NFC chip was detected</h1>-->
-        <div class="rotated-text">HITSZ</div>
-        
-        <!--<div class="instructions">
-            <p>这段文字使用CSS的<code>transform: rotate(90deg);</code>属性实现了顺时针90度旋转。</p>
-            <p>页面使用flex布局将内容垂直水平居中，并添加了渐变背景和玻璃态效果增强视觉体验。</p>
-            <p>将鼠标悬停在旋转的文字上可以看到放大效果。</p>
-        </div>-->
+        <div class="rotated-container">
+            <div class="rotated-text">HITSZ</div>
+            <div class="rotated-nfc">
+                <div class="nfc-icon"></div>
+                <span>An NFC chip was detected</span>
+            </div>
+        </div>
     </div>
 
     <script>
-        // 添加一些动态效果
+        // 添加鼠标移动交互效果
         document.addEventListener('mousemove', (e) => {
             const x = e.clientX / window.innerWidth;
             const y = e.clientY / window.innerHeight;
             
             document.body.style.background = `linear-gradient(${135 + x * 20}deg, 
                 #6a11cb 0%, #2575fc 100%)`;
+        });
+        
+        // 添加NFC提示的额外交互效果
+        const nfcAlert = document.querySelector('.rotated-nfc');
+        
+        nfcAlert.addEventListener('click', () => {
+            nfcAlert.style.background = 'rgba(255, 255, 255, 0.25)';
+            setTimeout(() => {
+                nfcAlert.style.background = 'rgba(255, 255, 255, 0.15)';
+            }, 300);
         });
     </script>
 </body>
